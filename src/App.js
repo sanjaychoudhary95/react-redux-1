@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Home from './components/Home'
 import Person from './components/Person'
+import {connect} from 'react-redux'
 
 class App extends Component {
   constructor() {
@@ -20,6 +21,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="App">
         <br/>
@@ -27,10 +29,18 @@ class App extends Component {
         <br/>
         <Person HomeData = {this.state.name}/>
         <h1> {this.state.name} </h1>
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        <p>The value comes from store: {this.props.myname} </p>
       </div>
 
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    myname: state.name
+  }
+}
+
+export default connect(mapStateToProps)(App);
